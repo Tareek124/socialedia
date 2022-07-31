@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "565265635730",
+    "project_id": "socialedia-fa9d5",
+    "storage_bucket": "socialedia-fa9d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565265635730:android:132c3d2c0b31993323494b",
+        "android_client_info": {
+          "package_name": "com.socialedia.tarrrek124abdalla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565265635730-s0043g1rtebtfc7u3laghlvm8vn05oji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsdKNjJiP4DVm5OnNbE16VFDGnsBCOoX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565265635730-s0043g1rtebtfc7u3laghlvm8vn05oji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565265635730:android:58b08f9bc69218f723494b",
+        "android_client_info": {
+          "package_name": "com.tarrrek124abdalla.socialedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565265635730-s0043g1rtebtfc7u3laghlvm8vn05oji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsdKNjJiP4DVm5OnNbE16VFDGnsBCOoX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565265635730-s0043g1rtebtfc7u3laghlvm8vn05oji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
