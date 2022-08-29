@@ -1,3 +1,6 @@
+import 'package:Socialedia/UI/screens/details_post.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:share/share.dart';
 import 'show_date.dart';
 import '../screens/profile_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,8 +16,8 @@ import 'like_animation.dart';
 import 'live_comments_view.dart';
 
 class PostCard extends StatefulWidget {
-  Map<String, dynamic> snap;
-  PostCard({Key? key, required this.snap}) : super(key: key);
+  final Map<String, dynamic> snap;
+  const PostCard({Key? key, required this.snap}) : super(key: key);
 
   @override
   State<PostCard> createState() => _PostCardState();
@@ -25,21 +28,49 @@ class _PostCardState extends State<PostCard> {
   bool isLikeAnimating = false;
   String? bio;
 
-  Future<String> getBio() async {
-    final userInfo = await FirebaseFirestore.instance
+  Future<void> getBio() async {
+    await FirebaseFirestore.instance
         .collection('users')
         .doc(widget.snap['uid'])
         .get()
         .then((value) {
       bio = value.data()!['bio'];
     });
-    return bio!;
   }
 
   @override
   void initState() {
     super.initState();
     getBio();
+  }
+
+  Future<void> buildDynamicLink(
+      {required String image,
+      required String postId,
+      required String description}) async {
+    String url = "http://socialedia.page.link";
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: url,
+      link: Uri.parse('$url/$postId'),
+      // ignore: prefer_const_constructors
+      androidParameters: AndroidParameters(
+        packageName: "com.tarrrek124abdalla.socialedia",
+        minimumVersion: 0,
+      ),
+      socialMetaTagParameters: SocialMetaTagParameters(
+          description: description,
+          imageUrl: Uri.parse(image),
+          title: "Socialedia Post"),
+    );
+    final dynamicLink =
+        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+
+    String? desc = dynamicLink.shortUrl.toString();
+
+    await Share.share(
+      desc,
+      subject: "SocialEdia Post",
+    );
   }
 
   @override
@@ -177,9 +208,22 @@ class _PostCardState extends State<PostCard> {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.35,
                           width: double.infinity,
-                          child: Image.network(
-                            widget.snap['postURL'].toString(),
-                            fit: BoxFit.cover,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Details(
+                                            postId: widget.snap['postID'],
+                                          )));
+                            },
+                            child: Hero(
+                              tag: widget.snap['postID'],
+                              child: Image.network(
+                                widget.snap['postURL'].toString(),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
                         AnimatedOpacity(
@@ -238,11 +282,14 @@ class _PostCardState extends State<PostCard> {
                                     imageUrl: state.userModel.imageURL,
                                     userName: state.userModel.userName))),
                       ),
-                      IconButton(
-                          icon: const Icon(
-                            Icons.send,
-                          ),
-                          onPressed: () {}),
+                      InkWell(
+                          onTap: () {
+                            buildDynamicLink(
+                                image: widget.snap['postURL'],
+                                postId: widget.snap['postID'],
+                                description: widget.snap['description']);
+                          },
+                          child: const Icon(Icons.share)),
                       Expanded(
                           child: Align(
                         alignment: Alignment.bottomRight,

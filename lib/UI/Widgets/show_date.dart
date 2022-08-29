@@ -13,8 +13,6 @@ class ShowDate extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Text(
         DateFormat.yMMMd().add_jm().format(dateTime.toDate()),
-        style: TextStyle(
-        ),
       ),
     );
   }

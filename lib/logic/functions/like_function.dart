@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> likePost(String postId, String uid, List likes) async {
@@ -46,4 +44,3 @@ Future<void> likeComment(
     print(err.toString());
   }
 }
-

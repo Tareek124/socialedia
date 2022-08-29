@@ -1,3 +1,6 @@
+import 'package:Socialedia/UI/screens/details_post.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:get/get.dart';
 import 'search_screen.dart';
 import 'feed_screen.dart';
 import 'profile_screen.dart';
@@ -23,14 +26,41 @@ class _HomeScreenState extends State<HomeScreen> {
   String? name;
   String? url;
 
-  @override
-  void initState() {
-    super.initState();
+  // void initDynamicLinks() async {
+  //   FirebaseDynamicLinks.instance.onLink.listen((event) {
+  //     final Uri deepLink = event.link;
+  //     handleMyLink(deepLink);
+  //     print(
+  //         "=================================deeep link ====================================");
+  //     print(deepLink.toString());
+  //   }).onError((handleError) {
+  //     print(handleError.toString());
+  //   });
+  // }
+
+  // void handleMyLink(Uri url) {
+  //   List<String> seperated = [];
+  //   seperated.addAll(url.path.split('/'));
+  //   print("The Token Is ${seperated[1]}");
+  //   Get.to(() => Details(postId: seperated[1]));
+  // }
+
+  _getNameAndImage() {
     BlocProvider.of<UserInfoCubit>(context).getUserInfos().then((value) {
       name = value.userName;
       url = value.imageURL;
     });
+  }
+
+  void initialDynamicLin() async {}
+
+  @override
+  void initState() {
+    super.initState();
+
+    _getNameAndImage();
     pageController = PageController();
+    // initDynamicLinks();
   }
 
   @override

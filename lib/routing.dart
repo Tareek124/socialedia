@@ -1,3 +1,4 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 import 'UI/screens/welcome_screen.dart';
 import 'logic/cubit/user%20infos/user_info_cubit.dart';
@@ -11,6 +12,7 @@ import 'logic/cubit/signIn/sign_in_cubit.dart';
 import 'logic/cubit/signUp/sign_up_cubit.dart';
 
 class AppRoutes {
+  AppRoutes();
   Route? generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case loginPage:
@@ -31,12 +33,11 @@ class AppRoutes {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => UserInfoCubit(),
-                  child: const HomeScreen(),
+                  child: HomeScreen(),
                 ));
 
       case welcomeScreen:
         return MaterialPageRoute(builder: (_) => const WelcomeScreen());
-
     }
     return null;
   }

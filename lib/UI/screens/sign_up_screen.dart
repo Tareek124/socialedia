@@ -11,6 +11,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../constants/colors.dart';
 import '../../logic/cubit/signUp/sign_up_cubit.dart';
 import '../../logic/functions/image_picker_function.dart';
+import '../../logic/functions/storage_function.dart';
 import '../../logic/functions/validation.dart';
 import '../Widgets/png_logo.dart';
 import '../Widgets/sign_up_listener.dart';
@@ -41,14 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _bioController.dispose();
   }
 
-  void _callBloc() {
-    BlocProvider.of<SignUpCubit>(context).createUser(
-        email: _textEditingController.text,
-        password: _passwordController.text,
-        bio: _bioController.text,
-        userName: _userNameController.text,
-        file: _image!);
-  }
+  void _callBloc() {}
 
   _pickImage() async {
     var perm = await Permission.storage.request();
@@ -109,7 +103,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         right: -1,
                         child: IconButton(
                             onPressed: _pickImage,
-                            icon:  Icon(Icons.add_a_photo,color: colorMode(context),)))
+                            icon: Icon(
+                              Icons.add_a_photo,
+                              color: colorMode(context),
+                            )))
                   ],
                 ),
                 const SizedBox(
@@ -119,7 +116,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   maxLines: 1,
                   controller: _textEditingController,
                   label: "Email",
-                  icon:  Icon(Icons.email,color: colorMode(context),),
+                  icon: Icon(
+                    Icons.email,
+                    color: colorMode(context),
+                  ),
                   isPassword: false,
                 ),
                 const SizedBox(
@@ -129,7 +129,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   maxLines: 1,
                   controller: _passwordController,
                   label: "Password",
-                  icon:  Icon(Icons.password,color: colorMode(context),),
+                  icon: Icon(
+                    Icons.password,
+                    color: colorMode(context),
+                  ),
                   isPassword: true,
                 ),
                 const SizedBox(
@@ -139,7 +142,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   maxLines: 1,
                   controller: _userNameController,
                   label: "User Name",
-                  icon:  Icon(Icons.person,color: colorMode(context),),
+                  icon: Icon(
+                    Icons.person,
+                    color: colorMode(context),
+                  ),
                   isPassword: false,
                 ),
                 const SizedBox(
@@ -149,14 +155,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   maxLines: 1,
                   controller: _bioController,
                   label: "Your Bio",
-                  icon:  Icon(Icons.more,color: colorMode(context),),
+                  icon: Icon(
+                    Icons.more,
+                    color: colorMode(context),
+                  ),
                   isPassword: false,
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 InkWell(
-                  onTap: isValid,
+                  onTap: () {
+                    BlocProvider.of<SignUpCubit>(context).createUser(
+                        email: _textEditingController.text,
+                        password: _passwordController.text,
+                        bio: _bioController.text,
+                        userName: _userNameController.text,
+                        file: _image!);
+                  },
                   child: Container(
                     width: 180,
                     height: 50,
@@ -187,7 +203,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Text("Already Have Account",style: TextStyle(color: colorMode(context),),),
+                    Text(
+                      "Already Have Account",
+                      style: TextStyle(
+                        color: colorMode(context),
+                      ),
+                    ),
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context);

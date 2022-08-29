@@ -20,14 +20,11 @@ class PostsCubitCubit extends Cubit<PostsCubitState?> {
 
   Future<void> postAPost(
       {required String description,
-      required Uint8List file,
+      required String imageUrl,
       required String uid,
       required String name,
       required String profImage}) async {
     emit(PostLoading());
-
-    String url =
-        await StorageMethods().uploadImageToStorage("postPic", file, true);
 
     String id = const Uuid().v1();
 
@@ -37,7 +34,7 @@ class PostsCubitCubit extends Cubit<PostsCubitState?> {
       time: FieldValue.serverTimestamp(),
       likes: const [],
       postID: id,
-      postURL: url,
+      postURL: imageUrl,
       userName: name,
       profileImage: profImage,
       dateTime: DateTime.now(),

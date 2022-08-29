@@ -87,11 +87,3 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 }
 
-        // "username": userName,
-        // "uid": uid,
-        // "email": email,
-        // "bio": bio,
-        // "followers": followers,
-        // "following": following,
-        // "url": imageURL
-

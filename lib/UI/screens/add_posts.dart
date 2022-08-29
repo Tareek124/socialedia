@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../logic/cubit/posts_cubit/posts_cubit_cubit.dart';
+import '../../logic/functions/storage_function.dart';
 import '../Widgets/color_mode.dart';
 import '../Widgets/post_listener.dart';
 import '../../logic/functions/image_picker_function.dart';
@@ -26,6 +27,7 @@ class AddPosts extends StatefulWidget {
 
 class _AddPostsState extends State<AddPosts> {
   Uint8List? _imageFile;
+  String? imageUrl;
   bool isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
 
@@ -57,6 +59,8 @@ class _AddPostsState extends State<AddPosts> {
                     setState(() {
                       _imageFile = file;
                     });
+                    imageUrl = await StorageMethods()
+                        .uploadImageToStorage("postPic", _imageFile!, true);
                   } else {
                     print("Denied");
                   }
@@ -75,6 +79,8 @@ class _AddPostsState extends State<AddPosts> {
                     setState(() {
                       _imageFile = file;
                     });
+                    imageUrl = await StorageMethods()
+                        .uploadImageToStorage("postPic", _imageFile!, true);
                   } else {
                     print("Denied");
                   }
@@ -174,7 +180,7 @@ class _AddPostsState extends State<AddPosts> {
                     BlocProvider.of<PostsCubitCubit>(context)
                         .postAPost(
                           description: _descriptionController.text,
-                          file: _imageFile!,
+                          imageUrl: imageUrl!,
                           uid: getUserId(),
                           name: widget.name,
                           profImage: widget.imageUrl,

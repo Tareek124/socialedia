@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'color_mode.dart';
 
-import '../../constants/colors.dart';
-
 class CustomTextFieldOutline extends StatelessWidget {
   const CustomTextFieldOutline(
       {Key? key,
@@ -22,7 +20,8 @@ class CustomTextFieldOutline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final inputBorder = OutlineInputBorder(
-        borderSide: Divider.createBorderSide(context, width: 2,color: colorMode(context)),
+        borderSide: Divider.createBorderSide(context,
+            width: 2, color: colorMode(context)),
         borderRadius: BorderRadius.circular(9));
 
     return TextFormField(
