@@ -3,6 +3,7 @@
 import 'dart:typed_data';
 
 import 'package:Socialedia/UI/Widgets/color_mode.dart';
+import 'package:Socialedia/constants/screen_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -211,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pushReplacementNamed(context, loginPage);
                         },
                         child: const Text("Log In"))
                   ],

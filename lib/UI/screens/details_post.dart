@@ -1,6 +1,6 @@
-import 'package:Socialedia/UI/Widgets/dynamic_progress_indicator.dart';
-import 'package:Socialedia/UI/Widgets/show_date.dart';
-import 'package:Socialedia/UI/screens/profile_screen.dart';
+import '../Widgets/dynamic_progress_indicator.dart';
+import '../Widgets/show_date.dart';
+import 'profile_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

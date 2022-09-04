@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
 import '../Widgets/color_mode.dart';
 import '../Widgets/dynamic_progress_indicator.dart';
 import '../Widgets/png_logo.dart';
 import '../Widgets/post_card.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -24,7 +25,10 @@ class _FeedScreenState extends State<FeedScreen> {
         title: svgLogo.svgLogo(),
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection("posts").orderBy('time',descending: true).snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection("posts")
+              .orderBy('time', descending: true)
+              .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {

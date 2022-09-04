@@ -1,6 +1,5 @@
-import 'package:Socialedia/UI/screens/details_post.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:get/get.dart';
+import 'package:flutter_offline/flutter_offline.dart';
+import 'package:lottie/lottie.dart';
 import 'search_screen.dart';
 import 'feed_screen.dart';
 import 'profile_screen.dart';
@@ -25,25 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late PageController pageController; // for tabs animation
   String? name;
   String? url;
-
-  // void initDynamicLinks() async {
-  //   FirebaseDynamicLinks.instance.onLink.listen((event) {
-  //     final Uri deepLink = event.link;
-  //     handleMyLink(deepLink);
-  //     print(
-  //         "=================================deeep link ====================================");
-  //     print(deepLink.toString());
-  //   }).onError((handleError) {
-  //     print(handleError.toString());
-  //   });
-  // }
-
-  // void handleMyLink(Uri url) {
-  //   List<String> seperated = [];
-  //   seperated.addAll(url.path.split('/'));
-  //   print("The Token Is ${seperated[1]}");
-  //   Get.to(() => Details(postId: seperated[1]));
-  // }
+  bool connected = false;
 
   _getNameAndImage() {
     BlocProvider.of<UserInfoCubit>(context).getUserInfos().then((value) {
@@ -60,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _getNameAndImage();
     pageController = PageController();
-    // initDynamicLinks();
   }
 
   @override
@@ -75,6 +55,34 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Widget buildBloc() {
+    return BlocBuilder<UserInfoCubit, UserInfoState?>(
+      builder: (context, state) {
+        if (state is UserInfoLoaded) {
+          return PageView(
+              controller: pageController,
+              onPageChanged: onPageChanged,
+              children: [
+                const FeedScreen(),
+                const SearchScreen(),
+                BlocProvider(
+                  create: (context) => PostsCubitCubit(),
+                  child: AddPosts(
+                    name: name!,
+                    imageUrl: url!,
+                  ),
+                ),
+                Profile(
+                  uid: state.userModel.uid,
+                )
+              ]);
+        } else {
+          return const SizedBox();
+        }
+      },
+    );
+  }
+
   void navigationTapped(int page) {
     pageController.jumpToPage(page);
   }
@@ -82,29 +90,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<UserInfoCubit, UserInfoState?>(
-        builder: (context, state) {
-          if (state is UserInfoLoaded) {
-            return PageView(
-                controller: pageController,
-                onPageChanged: onPageChanged,
-                children: [
-                  const FeedScreen(),
-                  const SearchScreen(),
-                  BlocProvider(
-                    create: (context) => PostsCubitCubit(),
-                    child: AddPosts(
-                      name: name!,
-                      imageUrl: url!,
-                    ),
-                  ),
-                  Profile(
-                    uid: state.userModel.uid,
-                  )
-                ]);
-          } else {
-            return const SizedBox();
-          }
+      body: OfflineBuilder(
+        connectivityBuilder: (
+          BuildContext context,
+          ConnectivityResult connectivity,
+          Widget child,
+        ) {
+          connected = connectivity != ConnectivityResult.none;
+
+          return connected == true
+              ? buildBloc()
+              : Center(child: Lottie.asset("assets/lottie/offline.json"));
+        },
+        builder: (context) {
+          return buildBloc();
         },
       ),
       bottomNavigationBar: BottomNavigationBar(

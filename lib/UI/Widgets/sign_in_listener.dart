@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../constants/screen_names.dart';
 import '../../logic/cubit/signIn/sign_in_cubit.dart';
 import 'dynamic_progress_indicator.dart';
@@ -38,7 +39,8 @@ class SignInListener {
           listener: (context, state) {
             if (state is LogInError) {
               Navigator.pop(context);
-              _showSnackBar(context:context, desc:state.errorMsg,title: "Error");
+              _showSnackBar(
+                  context: context, desc: state.errorMsg, title: "Error");
             } else if (state is LogInLoading) {
               showDialog(
                   context: context,

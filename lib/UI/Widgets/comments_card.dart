@@ -1,8 +1,9 @@
-import 'package:intl/intl.dart';
-import 'color_mode.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import '../../logic/functions/get_user_details.dart';
 import '../../logic/functions/like_function.dart';
+import 'color_mode.dart';
 import 'like_animation.dart';
 
 class CommentsCard extends StatefulWidget {

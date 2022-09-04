@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'color_mode.dart';
 
 class CustomTextFieldOutline extends StatelessWidget {
@@ -33,19 +34,9 @@ class CustomTextFieldOutline extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         hintText: label,
-        // icon: icon,
-        label: Row(
-          children: [
-            icon!,
-            const SizedBox(
-              width: 5,
-            ),
-            Text(
-              label!,
-            ),
-          ],
-        ),
+        labelText: label,
         focusedBorder: inputBorder,
+        prefixIcon: icon,
         errorBorder: inputBorder,
         enabledBorder: inputBorder,
         disabledBorder: inputBorder,

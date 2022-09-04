@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'color_mode.dart';
-
 class ShowDate extends StatelessWidget {
   final dateTime;
   const ShowDate({Key? key, required this.dateTime}) : super(key: key);

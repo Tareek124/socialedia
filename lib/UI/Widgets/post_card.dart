@@ -1,4 +1,4 @@
-import 'package:Socialedia/UI/screens/details_post.dart';
+import '../screens/details_post.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:share/share.dart';
 import 'show_date.dart';
