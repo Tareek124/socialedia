@@ -1,18 +1,14 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
+// ignore_for_file: no_leading_underscores_for_local_identifiers, avoid_print
 import 'dart:typed_data';
-
 import 'package:Socialedia/UI/Widgets/color_mode.dart';
 import 'package:Socialedia/constants/screen_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../../constants/colors.dart';
 import '../../logic/cubit/signUp/sign_up_cubit.dart';
 import '../../logic/functions/image_picker_function.dart';
-import '../../logic/functions/storage_function.dart';
 import '../../logic/functions/validation.dart';
 import '../Widgets/png_logo.dart';
 import '../Widgets/sign_up_listener.dart';
@@ -43,8 +39,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _bioController.dispose();
   }
 
-  void _callBloc() {}
-
   _pickImage() async {
     var perm = await Permission.storage.request();
     if (perm.isGranted) {
@@ -59,16 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final svgLogo = PNGLogo(context: context, height: 80);
     final svg = SVGLogo(context: context, height: 64);
-
-    final Validation _signUpValidation = Validation(
-      key: _key,
-    );
-
-    void isValid() {
-      _signUpValidation.validate() ? _callBloc() : print("Not Valid");
-    }
 
     return Scaffold(
       body: SafeArea(

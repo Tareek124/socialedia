@@ -6,5 +6,6 @@ Future<void> deletePost({required String postId}) async {
     await fireStore.collection('posts').doc(postId).delete();
   } catch (err) {
     print(err.toString());
+    print(err.hashCode.toString());
   }
 }

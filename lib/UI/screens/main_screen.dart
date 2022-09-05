@@ -21,12 +21,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _page = 0;
-  late PageController pageController; // for tabs animation
+  late PageController pageController;
   String? name;
   String? url;
   bool connected = false;
 
-  _getNameAndImage() {
+  getNameAndImage() {
     BlocProvider.of<UserInfoCubit>(context).getUserInfos().then((value) {
       name = value.userName;
       url = value.imageURL;
@@ -38,8 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
-    _getNameAndImage();
+    getNameAndImage();
     pageController = PageController();
   }
 

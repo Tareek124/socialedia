@@ -13,10 +13,11 @@ import '../Widgets/follow_button.dart';
 
 class Profile extends StatefulWidget {
   final String uid;
-  String? imageUrl;
-  String? name;
-  String? bio;
-  Profile({Key? key, required this.uid, this.imageUrl, this.name, this.bio})
+  final String? imageUrl;
+  final String? name;
+  final String? bio;
+  const Profile(
+      {Key? key, required this.uid, this.imageUrl, this.name, this.bio})
       : super(key: key);
 
   @override
@@ -304,7 +305,7 @@ class _ProfileState extends State<Profile> {
             ),
           );
         } else {
-          return SizedBox();
+          return const SizedBox();
         }
       },
     );

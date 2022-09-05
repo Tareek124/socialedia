@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DynamicProgressIndicator extends StatelessWidget {
@@ -6,11 +7,11 @@ class DynamicProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(
-              MediaQuery.of(context).platformBrightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black)),
-    );
+        child: CupertinoActivityIndicator(
+      color: MediaQuery.of(context).platformBrightness == Brightness.dark
+          ? Colors.white
+          : Colors.black,
+      radius: 15,
+    ));
   }
 }

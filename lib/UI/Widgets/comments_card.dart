@@ -7,9 +7,9 @@ import 'color_mode.dart';
 import 'like_animation.dart';
 
 class CommentsCard extends StatefulWidget {
-  Map<String, dynamic> snap;
+  final Map<String, dynamic> snap;
 
-  CommentsCard({Key? key, required this.snap}) : super(key: key);
+  const CommentsCard({Key? key, required this.snap}) : super(key: key);
 
   @override
   State<CommentsCard> createState() => _CommentsCardState();

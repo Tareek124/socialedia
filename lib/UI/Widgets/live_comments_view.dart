@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../../logic/functions/get_user_details.dart';
 import '../screens/comments_screen.dart';
-import 'color_mode.dart';
 import 'dynamic_progress_indicator.dart';
 
 class LiveViewComment extends StatelessWidget {
@@ -35,6 +33,13 @@ class LiveViewComment extends StatelessWidget {
               }
               return Text(
                 "View All ${snapshot.data!.docs.length} Comments",
+                style: TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.bold,
+                    color: MediaQuery.of(context).platformBrightness ==
+                            Brightness.dark
+                        ? Colors.white.withOpacity(0.6)
+                        : Colors.black.withOpacity(0.6)),
               );
             }),
       ),

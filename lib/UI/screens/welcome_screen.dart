@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../constants/screen_names.dart';
 import '../Widgets/color_mode.dart';
@@ -11,7 +9,6 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final svgLogo = SVGLogo(context: context, height: 64);
     final pngLogo = PNGLogo(context: context, height: 165);
 
     return Scaffold(
@@ -23,10 +20,16 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Expanded(flex: 1,child: SizedBox(height: 60,)),
-                Expanded(flex: 0,child: pngLogo.pngLogo()),
+                const Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      height: 60,
+                    )),
+                Expanded(flex: 0, child: pngLogo.pngLogo()),
                 // Expanded(flex: 1, child: svgLogo.svgLogo()),
-                const SizedBox(height: 130,),
+                const SizedBox(
+                  height: 130,
+                ),
                 InkWell(
                   onTap: () {
                     Navigator.pushReplacementNamed(context, loginPage);
@@ -50,8 +53,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 20
-                  ,
+                  height: 20,
                 ),
                 InkWell(
                   onTap: () {

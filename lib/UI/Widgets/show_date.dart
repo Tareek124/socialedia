@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ShowDate extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final dateTime;
   const ShowDate({Key? key, required this.dateTime}) : super(key: key);
 

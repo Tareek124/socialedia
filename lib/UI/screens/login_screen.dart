@@ -1,9 +1,6 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'package:Socialedia/UI/Widgets/color_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../constants/colors.dart';
 import '../../constants/screen_names.dart';
 import '../../logic/cubit/signIn/sign_in_cubit.dart';
@@ -41,13 +38,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final svgLogo = PNGLogo(context: context, height: 80);
     final svg = SVGLogo(context: context, height: 64);
 
-    final Validation _validate = Validation(key: _key);
+    final Validation validate = Validation(key: _key);
 
     void isValid() {
-      _validate.validate() ? _callBloc() : print("Not Valid");
+      validate.validate() ? _callBloc() : print("Not Valid");
     }
 
     return Scaffold(
@@ -75,7 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 maxLines: 1,
                 controller: _emailController,
                 label: "Email",
-                icon:  Icon(Icons.email,color: colorMode(context),),
+                icon: Icon(
+                  Icons.email,
+                  color: colorMode(context),
+                ),
                 isPassword: false,
               ),
               const SizedBox(
@@ -85,7 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 maxLines: 1,
                 controller: _passwordController,
                 label: "Password",
-                icon:  Icon(Icons.password,color: colorMode(context),),
+                icon: Icon(
+                  Icons.password,
+                  color: colorMode(context),
+                ),
                 isPassword: true,
               ),
               const SizedBox(
@@ -117,7 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text("Don't Have Account",style: TextStyle(color: colorMode(context)),),
+                  Text(
+                    "Don't Have Account",
+                    style: TextStyle(color: colorMode(context)),
+                  ),
                   TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, signUpPage);

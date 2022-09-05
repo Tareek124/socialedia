@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class LikeAnimation extends StatefulWidget {
@@ -31,7 +33,7 @@ class _LikeAnimationState extends State<LikeAnimation>
       vsync: this,
       duration: Duration(milliseconds: widget.duration.inMilliseconds ~/ 2),
     );
-    scale = Tween<double>(begin: 1, end: 1.2).animate(controller);
+    scale = Tween<double>(begin: 1, end: 1.5).animate(controller);
   }
 
   @override
@@ -48,7 +50,7 @@ class _LikeAnimationState extends State<LikeAnimation>
       await controller.forward();
       await controller.reverse();
       await Future.delayed(
-        const Duration(milliseconds: 200),
+        const Duration(milliseconds: 300),
       );
 
       if (widget.onEnd != null) {
